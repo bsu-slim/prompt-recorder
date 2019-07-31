@@ -17,6 +17,14 @@ try {
     log.error(err.message);
 }
 
+try {
+  if(!fs.existsSync(conf.dir)) {
+    fs.mkdirSync(conf.dir);
+  }
+} catch(err) {
+  log.error(err.message);
+}
+
 var db = new sqlite3.Database(conf.db.database);
 
 if(newDB) {
