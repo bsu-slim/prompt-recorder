@@ -1,0 +1,248 @@
+.App {
+    height: 100%;
+    max-width: 1280px;
+    margin: auto;
+}
+
+.App>h1:first-child {
+  padding-top: 14px;
+  text-align: center;
+}
+
+.App>.grid {
+    height: calc(100% - 64px);
+}
+
+.App>.grid>.column {
+  max-height: 100%;
+}
+
+.App>.grid .card {
+  height: 100%;
+}
+
+.App>.grid .card>.content {
+  height: 100%;
+}
+
+.App>.grid .card>.content>.description {
+    height: calc(100% - 92px);
+}
+
+.App>.grid .recorder>.card>.content>.description {
+    height: calc(100% - 142px);
+}
+
+.App>.grid .recorder>.card>.content>.description>.loader {
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.App>.grid .card>.content>.description>div:first-child {
+    height: 100%;
+}
+
+.App>.grid #prompts {
+  height: calc(100% - 87px);
+}
+
+.App>.grid #prompts-in-file {
+  height: calc(100% - 84px);
+}
+
+.App>.grid .prompt-file-form {
+  height: calc(100% - 132px);
+}
+
+.App>.grid .file-format {
+  margin-bottom: 12px
+}
+
+.App>.grid .prompt-list {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.App>.grid .prompt-list-manager {
+  height: calc(50% - 74px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.App>.grid .recording-list-manager {
+  height: calc(100% - 74px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.recorder {
+    height: 100%;
+}
+
+.controller {
+  text-align: center;
+  padding-top: 30px;
+}
+
+#prompt {
+  height: calc(100% - 270px);
+}
+
+#rec-button {
+  margin-bottom: 40px;
+}
+
+.App>.grid .card .tab{
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.App #log h5 {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.App #log>.content>.description {
+  height: calc(100% - 23px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.App .waiter {
+    height: 100%;
+}
+
+.App .waiter .description {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.App>.grid .waiter>.card>.content>.description>div:first-child {
+    height: auto;
+}
+
+.player-controls {
+  margin: 12px 0 24px 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.ui.buttons .button.player-download, .ui.buttons .button.player-forward {
+  border-radius: 0 0 0 0;
+}
+
+.volume-indicator {
+  width: 100%;
+  position: relative;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0,0,0,.87);
+  height: 16px;
+  margin-top: 4px;
+  opacity: 0.67;
+  text-align: right;
+  float: right;
+  right: 0;
+}
+
+/*#recordings .ui.buttons .volume-indicator {
+  margin-right: 36px;
+}*/
+
+#recordings .player-controls {
+  margin: 12px 12px 24px 0;
+}
+
+#recordings {
+  height: calc(100% - 80px);
+}
+
+.ui.progress.player-progress {
+  width: calc(100% - 232px);
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 36px;
+  border-radius: 0 0 0 0;
+  opacity: 0.67;
+}
+
+.ui.progress.player-progress .bar {
+  height: 36px;
+  border-radius: 0 0 0 0;
+  min-width: 2px;
+  transition: width .25s linear, background-color .25s linear;
+}
+
+.ui.progress.player-progress .bar>.progress {
+  color: rgba(255, 255, 255, 1);
+}
+
+.ui.header.player-title {
+  width: 100%;
+  padding: 0 0 8px 0;
+}
+
+.ui.violet.header.msg-time {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+#bars {
+  height: 30px;
+  margin: 0 0 0 -20px;
+  width: 40px;
+  left: 50%;
+  position: relative;
+  visibility: hidden;
+  top: -10px
+}
+
+#bars.active {
+  visibility: visible;
+}
+
+#bars .bar {
+  background: #502aa1;
+  bottom: 1px;
+  height: 3px;
+  position: absolute;
+  width: 3px;      
+  animation: sound 0ms -800ms linear infinite alternate;
+}
+
+@keyframes sound {
+  0% {
+     opacity: .35;
+      height: 3px; 
+  }
+  100% {
+      opacity: 1;       
+      height: 28px;        
+  }
+}
+
+#bars .bar:nth-child(1)  { left: 1px; animation-duration: 474ms; }
+#bars .bar:nth-child(2)  { left: 5px; animation-duration: 433ms; }
+#bars .bar:nth-child(3)  { left: 9px; animation-duration: 407ms; }
+#bars .bar:nth-child(4)  { left: 13px; animation-duration: 458ms; }
+#bars .bar:nth-child(5)  { left: 17px; animation-duration: 400ms; }
+#bars .bar:nth-child(6)  { left: 21px; animation-duration: 427ms; }
+#bars .bar:nth-child(7)  { left: 25px; animation-duration: 441ms; }
+#bars .bar:nth-child(8)  { left: 29px; animation-duration: 419ms; }
+#bars .bar:nth-child(9)  { left: 33px; animation-duration: 487ms; }
+#bars .bar:nth-child(10) { left: 37px; animation-duration: 442ms; }​
+
+
+#bars.active {
+  visibility: visible;
+}
