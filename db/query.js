@@ -16,6 +16,7 @@ function Query() {
             roomKey         VARCHAR(255) UNIQUE                 NOT NULL,
             active          INTEGER                             NOT NULL,
             shuffle         INTEGER                             NOT NULL,
+            log             INTEGER                             NOT NULL,
             created         DATETIME DEFAULT CURRENT_TIMESTAMP  NOT NULL
         );
     `;
@@ -69,7 +70,7 @@ function Query() {
     `;
 
 // == CREATE ==============================================
-    this.createRoom = 'INSERT INTO room (roomKey, active, shuffle) VALUES (?, ?, ?);';
+    this.createRoom = 'INSERT INTO room (roomKey, active, shuffle, log) VALUES (?, ?, ?, ?);';
     this.createPrompt = 'INSERT INTO prompt (prompt, languageID) VALUES (?, ?);';
     this.createRecorder = 'INSERT INTO recorder (recorderAge, recorderGender) VALUES (?, ?);';
     this.createPromptList = 'INSERT INTO promptlist (promptID, roomID) VALUES (?, ?);';
@@ -149,6 +150,7 @@ function Query() {
 
    this.updateRoomActive = 'UPDATE room SET active=? WHERE roomKey = ?';
    this.updateRoomShuffle = 'UPDATE room SET shuffle=? WHERE roomKey = ?';
+   this.updateRoomLog = 'UPDATE room SET log=? WHERE roomKey = ?';
 
 // == DELETE ==============================================
     this.deleteRecording        = 'DELETE FROM recording WHERE recordingID = ?;';

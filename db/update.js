@@ -58,6 +58,31 @@ module.exports = {
     });
   },
 
+  updateRoomLog: (socket, payload, io) => {
+    db.serialize(() => {
+      db.run(
+        Q.updateRoomLog,
+        [payload.log, payload.roomKey],
+        (err) => {
+          if(err) return log.error(err.message);
+          io.in(payload.roomKey).emit('dataRoom', payload);
+          log.success(
+            `Successfully updated logging for room '${payload.roomKey}' to ${payload.log ? 'true' : 'false'}.`,
+            {
+              broadcast: false,
+              room: payload.room,
+              sender: socket,
+              prefix: {
+                text: '[Update]',
+                color: chalk.magenta
+              }
+            }
+          );
+        }
+      )
+    });
+  },
+
   updateRoomShuffle: (socket, payload, io) => {
     db.serialize(() => {
       db.run(

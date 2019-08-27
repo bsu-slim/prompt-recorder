@@ -11,7 +11,8 @@ module.exports = {
             let room = payload.room;
             let active = 0;
             let shuffle = 0;
-            let roomData = [room, active, shuffle];
+            let logger = 0;
+            let roomData = [room, active, shuffle, logger];
     
             // Make the room
             let stmt = db.prepare(Q.createRoom);

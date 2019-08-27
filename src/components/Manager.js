@@ -30,6 +30,7 @@ class Manager extends React.Component {
         roomKey: '',
         active: false,
         shuffle: false,
+        log: false,
         created: ''
       },
       prompts: [],

@@ -45,7 +45,8 @@ const {
 const { 
     updateRecording,
     updateRoomActive,
-    updateRoomShuffle
+    updateRoomShuffle,
+    updateRoomLog
 } = require('./db/update');
 
 // -- Delete helpers --------------------------------------
@@ -240,6 +241,10 @@ io.on('connection', (socket) => {
 
     socket.on('updateRoomShuffle', (payload) => {
         updateRoomShuffle(socket, payload, io);
+    });
+
+    socket.on('updateRoomLog', (payload) => {
+        updateRoomLog(socket, payload, io);
     });
 
 // -- Delete ----------------------------------------------

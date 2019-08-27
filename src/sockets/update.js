@@ -8,6 +8,10 @@ export function updateRoomShuffle(payload) {
   socket.emit('updateRoomShuffle', payload);
 }
 
+export function updateRoomLog(payload) {
+  socket.emit('updateRoomLog', payload);
+}
+
 export function cbUpdateRecording(cb) {
   socket.on('updateRecording', payload => cb(payload));
 }

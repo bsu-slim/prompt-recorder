@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Checkbox, Header } from 'semantic-ui-react';
-import { updateRoomActive, updateRoomShuffle } from '../sockets/update';
+import { updateRoomActive, updateRoomShuffle, updateRoomLog } from '../sockets/update';
 
 
 class Settings extends React.Component {
@@ -17,6 +17,12 @@ class Settings extends React.Component {
     updateRoomShuffle(payload);
   }
 
+  handleLogDisable = (e, val) => {
+    let payload = this.props.settings;
+    payload.log = val.checked === true ? 1 : 0;
+    updateRoomLog(payload);
+  }
+
   render() {
     let settings = this.props.settings;
     return (
@@ -31,6 +37,17 @@ class Settings extends React.Component {
                 label={<label>Allow Users To Record? (Activate Session)</label>}
                 checked={settings.active === 0 ? false : true}
                 onChange={this.handleRoomActive}
+              />
+            </Form.Field>
+          </Form.Group>
+          <Form.Group>
+            <Form.Field>
+              <Checkbox
+                color='violet'
+                name='shuffle'
+                label={<label>Enable Log Output On Client</label>}
+                checked={settings.log === 0 ? false : true}
+                onChange={this.handleLogDisable}
               />
             </Form.Field>
           </Form.Group>
