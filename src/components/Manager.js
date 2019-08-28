@@ -5,6 +5,7 @@ import Prompts from './Prompts';
 import Settings from './Settings';
 import Importer from './Importer';
 import Recordings from './Recordings';
+import Exporter from './Exporter';
 
 import { 
   cbDataRoom,
@@ -13,7 +14,8 @@ import {
   cbListPrompts,
   cbListRoomRecordings,
   getPromptList,
-  getRoomRecordingList
+  getRoomRecordingList,
+  cbExportRoomRecordingList
 } from '../sockets/read';
 
 import {
@@ -30,8 +32,10 @@ class Manager extends React.Component {
         roomKey: '',
         active: false,
         shuffle: false,
+        log: false,
         created: ''
       },
+      exports: {},
       prompts: [],
       searchString: '',
       recordings: []
@@ -42,6 +46,7 @@ class Manager extends React.Component {
     cbDataPromptList(this.handleDataPromptList);
     cbListRoomRecordings(this.handleListRoomRecordings);
     cbReloadRoomRecording(this.handleReloadRecordings);
+    cbExportRoomRecordingList(this.handleExportRoomRecordingList);
   }
 
   componentDidMount() { 
@@ -64,6 +69,10 @@ class Manager extends React.Component {
     if(this._ismounted)
       this.setState({recordings: payload})
   };
+  handleExportRoomRecordingList = (payload) => {
+    if(this._ismounted)
+      this.setState({exports: payload})
+  }
   handleReloadRecordings = (payload) => this.loadRecordings();
   handleDataPrompt = (prompt) => {
     let prompts = this.state.prompts;
@@ -115,6 +124,7 @@ class Manager extends React.Component {
     let languages = this.props.languages;
     let prompts = this.state.prompts;
     let recordings = this.state.recordings;
+    let exported = this.state.exports;
     
     let panes = [
       { 
@@ -168,7 +178,10 @@ class Manager extends React.Component {
       },
       { 
         menuItem: { key: 'export', icon: 'download', content: 'Export'}, 
-        render: () => <Tab.Pane attached={false}><Header as='h1' color='violet'>Coming soon...</Header></Tab.Pane>
+        render: () => 
+          <Tab.Pane attached={false}>
+            <Exporter settings={settings} exported={exported} />
+          </Tab.Pane>
       }
     ];
 

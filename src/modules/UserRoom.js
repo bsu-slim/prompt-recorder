@@ -29,6 +29,7 @@ class UserRoom extends React.Component {
         roomKey: '',
         active: 0,
         shuffle: 0,
+        log: 0,
         created: ''
       },
       prompts: []
@@ -122,6 +123,7 @@ class UserRoom extends React.Component {
     let userID = match.params.userID;
     let isNew = this.state.isNew;
     let prompts = this.state.prompts;
+    let log = this.state.room.log;
     let newRecorder = this.state.newRecorder;
     
     return (
@@ -140,9 +142,12 @@ class UserRoom extends React.Component {
                 />
             }
           </Grid.Column>
-          <Grid.Column>
-            <Log />
-          </Grid.Column>
+          { log === 1 ?
+            (<Grid.Column>
+              <Log />
+            </Grid.Column>)
+            : ''
+          }
         </Grid>
       </div>
     );
