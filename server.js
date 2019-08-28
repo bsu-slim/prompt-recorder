@@ -120,10 +120,12 @@ function ifRecorderExists(key, t, f) {
     });
 }
 
+
 // == FILE SERVE ==========================================
 
 app.use(express.static('build'));
 app.use('/audio', express.static(aDir));
+app.use('/export', express.static(conf.export.dir));
 app.use('*', express.static('build'));
 
 
