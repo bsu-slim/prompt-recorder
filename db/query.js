@@ -145,6 +145,14 @@ function Query() {
             WHERE roomID = ?;
     `;
 
+    this.exportRoomRecordingList  = `
+    SELECT * FROM recording
+        INNER JOIN prompt ON recording.promptID = prompt.promptID
+        INNER JOIN room ON recording.roomID = room.roomID
+        INNER JOIN recorder ON recording.recorderID = recorder.recorderID
+        WHERE recording.roomID = ?;
+    `;
+
 // == UPDATE ==============================================
    this.updateRecording = 'UPDATE recording SET filepath=? WHERE recordingID =?;';
 

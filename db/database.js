@@ -21,6 +21,9 @@ try {
   if(!fs.existsSync(conf.dir)) {
     fs.mkdirSync(conf.dir);
   }
+  if(!fs.existsSync(conf.export.dir)) {
+    fs.mkdirSync(conf.export.dir);
+  }
 } catch(err) {
   log.error(err.message);
 }

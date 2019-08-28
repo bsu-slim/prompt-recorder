@@ -60,6 +60,10 @@ export function cbListRoomRecordings (cb) {
   socket.on('listRoomRecordings', payload => cb(payload));
 }
 
+export function cbExportRoomRecordingList (cb) {
+  socket.on('dataExportList', payload => cb(payload));
+}
+
 export function joinAdmin(payload) {
   socket.emit('joinAdmin', payload);
 }
@@ -74,6 +78,10 @@ export function getRecordingList(payload) {
 
 export function getRoomRecordingList(payload) {
   socket.emit('getRoomRecordingList', payload)
+}
+
+export function exportRoomRecordingList(payload) {
+  socket.emit('exportRoomRecordingList', payload);
 }
 
 export function getRoomPrompts(payload) {

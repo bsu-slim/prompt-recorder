@@ -6,6 +6,13 @@ module.exports = {
         channels: 1 // channels for saved audio
     },
     db: {
-        database:':memory:' // file to save DB in, :memory: for ephemeral
+        database: ':memory:' // file to save DB in, :memory: for ephemeral
+    },
+    export: {
+      zipConf: {
+        base64: false,
+        compression: 'DEFLATE'
+      },
+      dir: './public/export/'
     }
 };

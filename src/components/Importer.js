@@ -39,7 +39,7 @@ class Importer extends React.Component {
         text = e.target.result;
         let prompts = text.split('\n');
         for(let i = 0; i < prompts.length; i++) {
-          prompts[i] = {prompt: prompts[i]};
+          prompts[i] = {prompt: prompts[i].replace(/[\n\r]+/g, '').replace(/\s{2,10}/g, ' ')};
         }
         this.setState({prompts: prompts});
       });

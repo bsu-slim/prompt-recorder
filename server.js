@@ -5,6 +5,7 @@ const server        = require('http').Server(app);
 let   io            = require('socket.io')(server);
 const wav           = require('wav');
 const path          = require('path');
+const fs            = require('fs');
 
 // == SETTINGS ============================================
 const conf          = require('./server-conf'); // server config file
@@ -37,6 +38,7 @@ const {
     getPromptList,
     getRecordingList,
     getRoomRecordingList,
+    exportRoomRecordingList,
     getRoomPrompts,
     getRecorder
 } = require('./db/read');
@@ -57,7 +59,7 @@ const {
 
 
 
-const initRoom = (socket, room) => {
+const initRoom = (socket, room, io) => {
     
     db.serialize(() => {
         
@@ -78,6 +80,14 @@ const initRoom = (socket, room) => {
             if(err) return log.error(err.message);
             if(row) socket.emit('dataRoom', row);
         });
+
+        let exportList = 
+          fs.readdirSync(conf.export.dir)
+            .filter((file) => { 
+              return file.slice(0, room.length) === room
+            });
+
+        io.in(room).emit('dataExportList', {dir: conf.export.dir.substring(8), list: exportList});
 
     });
 
@@ -153,7 +163,7 @@ io.on('connection', (socket) => {
         );
         ifRecorderExists(
             payload.recorder ? payload.recorder : -1,
-            (row) => initRoom(socket, payload.room), // if recorder exists init
+            (row) => initRoom(socket, payload.room, io), // if recorder exists init
             () => {
               socket.emit('noRecorder', payload)
               log.error(
@@ -181,7 +191,7 @@ io.on('connection', (socket) => {
             
         );
         
-        initRoom(socket, payload.room); // always init room for admin
+        initRoom(socket, payload.room, io); // always init room for admin
 
     });
 
@@ -223,6 +233,10 @@ io.on('connection', (socket) => {
 
     socket.on('getRoomRecordingList', (payload) => {
         getRoomRecordingList(socket, payload);
+    });
+
+    socket.on('exportRoomRecordingList', (payload) => {
+        exportRoomRecordingList(socket, payload, io);
     });
 
     socket.on('getRecorder', (payload) => {
